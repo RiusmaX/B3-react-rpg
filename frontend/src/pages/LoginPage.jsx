@@ -1,6 +1,8 @@
+import LoginSection from '../components/sections/LoginSection'
+
 function LoginPage () {
   return (
-    <h1>Login Page</h1>
+    <LoginSection />
   )
 }
 

@@ -1,1 +1,10 @@
-@import 'tailwindcss'
+@import 'tailwindcss';
+
+header, 
+footer {
+  min-height: 5vh;
+}
+
+main {
+  min-height: 90vh;
+}
