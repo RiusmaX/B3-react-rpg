@@ -1,0 +1,13 @@
+{
+  "name": "rpg",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "git@github.com:RiusmaX/B3-react-rpg.git",
+  "author": "Marius <marius.sergent@gmail.com>",
+  "license": "MIT",
+  "scripts": {
+    "init": "cd frontend/ && yarn && cd ../backend && yarn",
+    "dev:front": "cd frontend/ && yarn dev",
+    "dev:back": "cd backend/ && yarn dev"
+  }
+}
