@@ -1,6 +1,11 @@
+import { BrowserRouter } from 'react-router'
+import MainRouter from './navigation/MainRouter'
+
 function App () {
   return (
-    <h1 className='text-xl text-center'>HELLO WORLD !</h1>
+    <BrowserRouter>
+      <MainRouter />
+    </BrowserRouter>
   )
 }
 

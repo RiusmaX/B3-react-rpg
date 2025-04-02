@@ -9,5 +9,8 @@
     "init": "cd frontend/ && yarn && cd ../backend && yarn",
     "dev:front": "cd frontend/ && yarn dev",
     "dev:back": "cd backend/ && yarn dev"
+  },
+  "devDependencies": {
+    "standard": "^17.1.2"
   }
 }
