@@ -1,3 +1,4 @@
+import { Link } from 'react-router'
 import { strapiLoginLocal } from '../../api/strapi'
 import LoginForm from '../forms/LoginForm'
 
@@ -10,9 +11,12 @@ function LoginSection () {
   }
 
   return (
-    <section className='flex flex-col w-full h-full mx-auto justify-center items-center'>
-      <h2>Login Section</h2>
+    <section className='flex flex-col w-full h-full mx-auto justify-center items-center gap-4'>
+      <h2 className='text-2xl font-semibold'>Se connecter</h2>
       <LoginForm onSubmit={handleSubmit} />
+      <Link to='/register' className='text-sm underline'>
+        Je n'ai pas de compte
+      </Link>
     </section>
   )
 }

@@ -18,6 +18,16 @@ const strapiLoginLocal = async (credentials) => {
   }
 }
 
+const strapiRegisterLocal = async (data) => {
+  try {
+    const response = await api.post('/auth/local/register', data)
+    return response.data
+  } catch (error) {
+    console.error(error)
+  }
+}
+
 export {
-  strapiLoginLocal
+  strapiLoginLocal,
+  strapiRegisterLocal
 }
