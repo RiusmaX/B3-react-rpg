@@ -1,10 +1,18 @@
 import { BrowserRouter } from 'react-router'
 import MainRouter from './navigation/MainRouter'
+import { useState } from 'react'
+import AuthRouter from './navigation/AuthRouter'
 
 function App () {
+  const [isLoggedIn, setIsLoggedIn] = useState(false)
+
   return (
     <BrowserRouter>
-      <MainRouter />
+      {
+        isLoggedIn
+          ? <MainRouter />
+          : <AuthRouter />
+      }
     </BrowserRouter>
   )
 }
