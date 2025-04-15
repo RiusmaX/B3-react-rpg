@@ -72,6 +72,12 @@
       ],
       "type": "media",
       "multiple": false
+    },
+    "games": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::game.game",
+      "mappedBy": "users"
     }
   }
 }
