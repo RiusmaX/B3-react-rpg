@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import Input from './inputs/Input'
+import Button from '../button'
 
 function RegisterForm ({ onSubmit }) {
   const [data, setData] = useState({
@@ -33,12 +34,11 @@ function RegisterForm ({ onSubmit }) {
         value={data.password}
         onChangeText={(text) => setData({ ...data, password: text })}
       />
-      <button
+      <Button
         type='submit'
-        className='bg-green-400 hover:bg-green-200 px-4 py-2 rounded-lg cursor-pointer shadow-md transition-all duration-200'
       >
         S'inscrire
-      </button>
+      </Button>
     </form>
   )
 }

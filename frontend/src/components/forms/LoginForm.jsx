@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import Input from './inputs/Input'
+import Button from '../button'
 
 function LoginForm ({ onSubmit }) {
   const [credentials, setCredentials] = useState({
@@ -26,12 +27,11 @@ function LoginForm ({ onSubmit }) {
         value={credentials.password}
         onChangeText={(text) => setCredentials({ ...credentials, password: text })}
       />
-      <button
+      <Button
         type='submit'
-        className='bg-green-400 hover:bg-green-200 px-4 py-2 rounded-lg cursor-pointer shadow-md transition-all duration-200'
       >
         Se connecter
-      </button>
+      </Button>
     </form>
   )
 }

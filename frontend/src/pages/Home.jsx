@@ -1,3 +1,4 @@
+import Button from '../components/button'
 import { useAuth } from '../contexts/AuthContext'
 
 function Home () {
@@ -6,12 +7,12 @@ function Home () {
   return (
     <>
       <h1>Home</h1>
-      <button
+      <Button
+        variant='danger'
         onClick={logout}
-        className='bg-red-400 hover:bg-green-200 px-4 py-2 rounded-lg cursor-pointer shadow-md transition-all duration-200'
       >
         Se déconnecter
-      </button>
+      </Button>
     </>
   )
 }
