@@ -1,12 +1,13 @@
 import { Link } from 'react-router'
-import { strapiLoginLocal } from '../../api/strapi'
 import LoginForm from '../forms/LoginForm'
+import { useAuth } from '../../contexts/AuthContext'
 
 function LoginSection () {
+  const { login } = useAuth()
+
   const handleSubmit = async (credentials) => {
     if (credentials?.identifier && credentials?.password) {
-      const loginData = await strapiLoginLocal(credentials)
-      console.log(loginData)
+      await login(credentials)
     }
   }
 
