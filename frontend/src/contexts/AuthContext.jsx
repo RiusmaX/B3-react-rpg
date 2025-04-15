@@ -1,5 +1,6 @@
 import { createContext, useContext, useReducer } from 'react'
 import { strapiLoginLocal } from '../api/strapi'
+import { toast } from 'react-toastify'
 
 const AuthContext = createContext()
 
@@ -43,7 +44,7 @@ const authReducer = (previousState, action) => {
       }
     case actionTypes.LOGOUT:
       return initialState
-    default :
+    default:
       throw new Error(`Unhandled action type : ${action.type}`)
   }
 }
@@ -53,11 +54,20 @@ const authFactory = (previousState, dispatch) => ({
     dispatch({
       type: actionTypes.LOADING
     })
-    const loginData = await strapiLoginLocal(credentials)
-    if (loginData.user && loginData.jwt) {
+    try {
+      const loginData = await strapiLoginLocal(credentials)
+      if (loginData.user && loginData.jwt) {
+        dispatch({
+          type: actionTypes.LOGIN_SUCCESS,
+          data: loginData
+        })
+      }
+    } catch (error) {
+      console.error(error)
+      toast.error(error?.response?.data?.error?.message)
       dispatch({
-        type: actionTypes.LOGIN_SUCCESS,
-        data: loginData
+        type: actionTypes.ERROR,
+        error: error?.response?.data?.error?.message
       })
     }
   },

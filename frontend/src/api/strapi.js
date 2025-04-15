@@ -10,21 +10,13 @@ const api = axios.create({
 })
 
 const strapiLoginLocal = async (credentials) => {
-  try {
-    const response = await api.post('/auth/local', credentials)
-    return response.data
-  } catch (error) {
-    console.error(error)
-  }
+  const response = await api.post('/auth/local', credentials)
+  return response.data
 }
 
 const strapiRegisterLocal = async (data) => {
-  try {
-    const response = await api.post('/auth/local/register', data)
-    return response.data
-  } catch (error) {
-    console.error(error)
-  }
+  const response = await api.post('/auth/local/register', data)
+  return response.data
 }
 
 export {
