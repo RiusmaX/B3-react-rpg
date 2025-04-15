@@ -1,6 +1,6 @@
 import LoginSection from '../components/sections/LoginSection'
 
-function LoginPage () {
+function LoginPage ({ navigation }) {
   return (
     <LoginSection />
   )

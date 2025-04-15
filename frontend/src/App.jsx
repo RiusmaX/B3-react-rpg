@@ -1,12 +1,12 @@
 import { BrowserRouter } from 'react-router'
 import MainRouter from './navigation/MainRouter'
-import { useState } from 'react'
 import AuthRouter from './navigation/AuthRouter'
 import GlobalLayout from './layouts/GlobalLayout'
 import { ToastContainer } from 'react-toastify'
+import { useAuth } from './contexts/AuthContext'
 
 function App () {
-  const [isLoggedIn, setIsLoggedIn] = useState(false)
+  const { state: { isLoggedIn } } = useAuth()
 
   return (
     <GlobalLayout>

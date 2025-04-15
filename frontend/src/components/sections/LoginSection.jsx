@@ -1,13 +1,16 @@
-import { Link } from 'react-router'
+import { Link, useNavigate } from 'react-router'
 import LoginForm from '../forms/LoginForm'
 import { useAuth } from '../../contexts/AuthContext'
 
 function LoginSection () {
   const { login, state } = useAuth()
 
+  const navigate = useNavigate()
+
   const handleSubmit = async (credentials) => {
     if (credentials?.identifier && credentials?.password) {
       await login(credentials)
+      navigate('/')
     }
   }
 

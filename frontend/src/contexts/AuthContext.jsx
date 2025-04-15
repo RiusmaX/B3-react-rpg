@@ -1,4 +1,4 @@
-import { createContext, useContext, useReducer } from 'react'
+import { createContext, useContext, useEffect, useReducer } from 'react'
 import { strapiLoginLocal } from '../api/strapi'
 import { toast } from 'react-toastify'
 
@@ -7,6 +7,7 @@ const AuthContext = createContext()
 const initialState = {
   user: null,
   jwt: null,
+  isLoggedIn: false,
   loading: false,
   error: null
 }
@@ -27,6 +28,7 @@ const authReducer = (previousState, action) => {
       return {
         user: action.data.user,
         jwt: action.data.jwt,
+        isLoggedIn: true,
         loading: false,
         error: null
       }
@@ -37,10 +39,8 @@ const authReducer = (previousState, action) => {
       }
     case actionTypes.ERROR:
       return {
-        user: null,
-        jwt: null,
-        error: action.error,
-        loading: false
+        ...initialState,
+        error: action.error
       }
     case actionTypes.LOGOUT:
       return initialState
@@ -79,7 +79,14 @@ const authFactory = (previousState, dispatch) => ({
 })
 
 const AuthProvider = ({ children }) => {
-  const [state, dispatch] = useReducer(authReducer, initialState)
+  // Récupération de l'état sauvegardé
+  const savedState = JSON.parse(window.localStorage.getItem('@AUTH'))
+  const [state, dispatch] = useReducer(authReducer, savedState || initialState)
+
+  useEffect(() => {
+    // Sauvegarde de l'état à chaque changement via la liste de dépendances du useEffect()
+    window.localStorage.setItem('@AUTH', JSON.stringify(state))
+  }, [state])
 
   return (
     <AuthContext.Provider value={{ state, ...authFactory(state, dispatch) }}>
