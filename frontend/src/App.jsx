@@ -9,16 +9,16 @@ function App () {
   const { state: { isLoggedIn } } = useAuth()
 
   return (
-    <GlobalLayout>
-      <BrowserRouter>
+    <BrowserRouter>
+      <GlobalLayout>
         {
           isLoggedIn
             ? <MainRouter />
             : <AuthRouter />
         }
-      </BrowserRouter>
-      <ToastContainer />
-    </GlobalLayout>
+        <ToastContainer />
+      </GlobalLayout>
+    </BrowserRouter>
   )
 }
 

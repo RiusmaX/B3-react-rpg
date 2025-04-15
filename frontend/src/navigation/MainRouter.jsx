@@ -1,5 +1,6 @@
 import { Routes, Route, Navigate } from 'react-router'
-import Home from '../pages/Home'
+import HomePage from '../pages/HomePage'
+import ProfilePage from '../pages/ProfilePage'
 
 function MainRouter () {
   return (
@@ -8,7 +9,8 @@ function MainRouter () {
         path='*'
         element={<Navigate to='/' replace />}
       />
-      <Route index path='/' element={<Home />} />
+      <Route path='/' element={<HomePage />} />
+      <Route path='/profile' element={<ProfilePage />} />
     </Routes>
   )
 }
