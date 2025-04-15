@@ -1,19 +1,9 @@
-import Button from '../components/button'
-import { useAuth } from '../contexts/AuthContext'
+// import Button from '../components/button'
+import NewGameSection from '../components/sections/NewGameSection'
 
 function Home () {
-  const { logout } = useAuth()
-
   return (
-    <>
-      <h1>Home</h1>
-      <Button
-        variant='danger'
-        onClick={logout}
-      >
-        Se déconnecter
-      </Button>
-    </>
+    <NewGameSection />
   )
 }
 
