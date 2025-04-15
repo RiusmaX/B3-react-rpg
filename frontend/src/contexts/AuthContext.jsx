@@ -1,5 +1,5 @@
 import { createContext, useContext, useEffect, useReducer } from 'react'
-import { strapiLoginLocal } from '../api/strapi'
+import { strapiLoginLocal, strapiRegisterLocal } from '../api/strapi'
 import { toast } from 'react-toastify'
 
 const AuthContext = createContext()
@@ -63,12 +63,23 @@ const authFactory = (previousState, dispatch) => ({
         })
       }
     } catch (error) {
-      console.error(error)
-      toast.error(error?.response?.data?.error?.message)
-      dispatch({
-        type: actionTypes.ERROR,
-        error: error?.response?.data?.error?.message
-      })
+      handleError(dispatch, error)
+    }
+  },
+  register: async (user) => {
+    dispatch({
+      type: actionTypes.LOADING
+    })
+    try {
+      const registerData = await strapiRegisterLocal(user)
+      if (registerData.user && registerData.jwt) {
+        dispatch({
+          type: actionTypes.REGISTER_SUCCESS,
+          data: registerData
+        })
+      }
+    } catch (error) {
+      handleError(dispatch, error)
     }
   },
   logout: () => {
@@ -77,6 +88,15 @@ const authFactory = (previousState, dispatch) => ({
     })
   }
 })
+
+const handleError = (dispatch, error) => {
+  console.error(error)
+  toast.error(error?.response?.data?.error?.message)
+  dispatch({
+    type: actionTypes.ERROR,
+    error: error?.response?.data?.error?.message
+  })
+}
 
 const AuthProvider = ({ children }) => {
   // Récupération de l'état sauvegardé

@@ -1,10 +1,16 @@
 @import 'tailwindcss';
 
+@theme {
+  --color-primary: #4a90e2;
+  --color-secondary: #50e3c2;
+  --color-medieval: linear-gradient(135deg, #2e7d32, #a5d6a7); 
+}
+
 header, 
 footer {
   min-height: 5vh;
 }
 
-main {
+/* main {
   min-height: 90vh;
-}
+} */

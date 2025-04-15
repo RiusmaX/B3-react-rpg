@@ -15,11 +15,8 @@ function LoginSection () {
   }
 
   return (
-    <section className='flex flex-col w-full h-full mx-auto justify-center items-center gap-4'>
+    <section className='flex flex-col w-full h-full mx-auto justify-center items-center gap-4 bg-white shadow-md rounded-lg p-4 max-w-md'>
       <h2 className='text-2xl font-semibold'>Se connecter</h2>
-      <pre>
-        {JSON.stringify(state, null, 2)}
-      </pre>
       <LoginForm onSubmit={handleSubmit} />
       <p className='text-red-600'>
         {state.error}
