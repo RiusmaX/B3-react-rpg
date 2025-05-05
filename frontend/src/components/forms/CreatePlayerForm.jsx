@@ -7,7 +7,7 @@ import Button from '../button'
 function CreatePlayerForm () {
   const [playerData, setPlayerData] = useState({
     name: '',
-    class: ''
+    class: 'bard'
   })
 
   const handleChangeClass = (e) => {
