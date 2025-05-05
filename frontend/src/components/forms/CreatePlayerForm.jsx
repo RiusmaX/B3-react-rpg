@@ -4,11 +4,13 @@ import Select from './inputs/Select'
 import { playerClasses } from '../../config/constants'
 import Button from '../button'
 import { generatePlayer } from '../../api/aiBridge'
+import { toast } from 'react-toastify'
 
 function CreatePlayerForm () {
   const [playerData, setPlayerData] = useState({
     name: '',
-    class: 'bard'
+    class: 'bard',
+    description: null
   })
 
   const handleChangeClass = (e) => {
@@ -17,8 +19,17 @@ function CreatePlayerForm () {
 
   const handleSubmit = async (e) => {
     e.preventDefault()
-    console.log(playerData)
-    const player = await generatePlayer(playerData)
+    try {
+      const player = await generatePlayer(playerData)
+      setPlayerData({
+        ...playerData,
+        name: player.name,
+        description: player.description
+      })
+    } catch (error) {
+      console.error(error)
+      toast.error(error)
+    }
   }
 
   return (
@@ -38,6 +49,11 @@ function CreatePlayerForm () {
         label='Classe du personnage'
         onChange={handleChangeClass}
       />
+      {playerData.description && (
+        <textarea className='w-2xl h-60'>
+          {playerData.description}
+        </textarea>
+      )}
       <Button
         type='submit'
       >

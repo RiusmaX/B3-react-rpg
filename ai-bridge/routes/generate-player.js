@@ -8,7 +8,13 @@ router.post('/', async (req, res) => {
   const { body } = req
   if (!body) return res.status(500).send('Missing body')
 
-  const result = await generatePlayer(body)
+  try {
+    const result = await generatePlayer(body)
+    return res.send(result)
+  } catch (error) {
+    console.error(error)
+    return res.status(500).send(error)
+  }
 })
 
 module.exports = router

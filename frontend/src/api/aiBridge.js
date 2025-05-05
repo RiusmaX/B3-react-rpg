@@ -11,7 +11,7 @@ const api = axios.create({
 
 const generatePlayer = async (params) => {
   const result = await api.post('/generate-player', params)
-  return result
+  return result.data
 }
 
 export {
