@@ -8,7 +8,8 @@ const generatePlayer = async (data) => {
      Nom: ${data.name}
      Classe: ${data.class}
      Univers: Dark fantasy medieval
-    Soit drôle
+    Soit drôle.
+    Répond en format JSON avec les champs "name", "description"
     `
   )
   console.log(aiResponse)
