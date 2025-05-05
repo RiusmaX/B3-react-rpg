@@ -4,8 +4,8 @@ import Button from '../button'
 
 function LoginForm ({ onSubmit }) {
   const [credentials, setCredentials] = useState({
-    identifier: 'marius@sergent.dev',
-    password: 'password'
+    identifier: '',
+    password: ''
   })
 
   const handleSubmit = (event) => {

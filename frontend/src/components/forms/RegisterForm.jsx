@@ -4,9 +4,9 @@ import Button from '../button'
 
 function RegisterForm ({ onSubmit }) {
   const [data, setData] = useState({
-    email: 'marius2@sergent.dev',
-    username: 'marius2',
-    password: 'password'
+    email: '',
+    username: '',
+    password: ''
   })
 
   const handleSubmit = (event) => {

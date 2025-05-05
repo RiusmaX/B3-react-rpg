@@ -13,7 +13,7 @@ const api = axios.create({
 api.interceptors.request.use(
   (config) => {
     const savedState = JSON.parse(window.localStorage.getItem('@AUTH'))
-    if (savedState) {
+    if (savedState?.jwt) {
       config.headers.Authorization = 'Bearer ' + savedState.jwt
     }
     return config
