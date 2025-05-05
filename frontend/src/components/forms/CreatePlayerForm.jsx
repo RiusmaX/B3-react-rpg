@@ -3,6 +3,7 @@ import Input from './inputs/Input'
 import Select from './inputs/Select'
 import { playerClasses } from '../../config/constants'
 import Button from '../button'
+import { generatePlayer } from '../../api/aiBridge'
 
 function CreatePlayerForm () {
   const [playerData, setPlayerData] = useState({
@@ -14,9 +15,10 @@ function CreatePlayerForm () {
     setPlayerData({ ...playerData, class: e.target.value })
   }
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault()
     console.log(playerData)
+    const player = await generatePlayer(playerData)
   }
 
   return (
