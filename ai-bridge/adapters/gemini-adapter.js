@@ -17,6 +17,9 @@ const generateText = async (prompt) => {
   console.log('generate text')
   const response = await ai.models.generateContent({
     model: 'gemini-2.0-flash',
+    config: {
+      responseMimeType: 'application/json'
+    },
     contents: prompt
   })
   console.log(response.candidates[0].content)
