@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router'
 import Modal from 'react-modal'
 import Button from '../button'
 import CreatePlayerForm from '../forms/CreatePlayerForm'
+import { useState } from 'react'
 
 const customStyles = {
   content: {
@@ -16,6 +17,7 @@ const customStyles = {
 }
 
 function ProfileSection () {
+  const [isModalOpen, setIsModalOpen] = useState(false)
   const { logout } = useAuth()
   const navigate = useNavigate()
 
@@ -30,6 +32,7 @@ function ProfileSection () {
         <h2 className='text-2xl font-semibold'>Mon Profil</h2>
         <Button
           variant='info'
+          onClick={() => setIsModalOpen(true)}
         >
           Créer un personnage
         </Button>
@@ -41,9 +44,10 @@ function ProfileSection () {
         </Button>
       </section>
       <Modal
-        isOpen
+        isOpen={isModalOpen}
         contentLabel='Informations du joueur'
         style={customStyles}
+        onRequestClose={() => setIsModalOpen(false)}
       >
         <h2 className='text-xl font-semibold mb-4'>Créer un personnage</h2>
         <CreatePlayerForm />
