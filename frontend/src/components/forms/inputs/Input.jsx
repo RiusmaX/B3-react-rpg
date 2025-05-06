@@ -3,6 +3,7 @@ function Input ({
   value,
   onChange,
   onChangeText,
+  className = '',
   ...props
 }) {
   const handleChange = (event) => {
@@ -11,13 +12,13 @@ function Input ({
   }
 
   return (
-    <label className='flex flex-col gap-0.5'>
-      {label} :
+    <label className='flex flex-col gap-1 text-gray-200 w-full'>
+      {label && <span className='mb-1 text-sm font-medium'>{label}</span>}
       <input
         {...props}
         value={value}
         onChange={handleChange}
-        className='border-2 border-neutral-200 rounded-md py-1 px-1 focus:border-neutral-400 hover:border-neutral-400 focus-visible:border-neutral-400 outline-0 transition-all duration-200'
+        className={`bg-gray-800 border-2 border-gray-700 rounded-md py-2 px-3 text-gray-100 placeholder-gray-400 focus:border-green-400 focus:ring-2 focus:ring-green-400 outline-none transition-all duration-200 ${className}`}
       />
     </label>
   )

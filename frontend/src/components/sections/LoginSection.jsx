@@ -1,29 +1,23 @@
-import { Link, useNavigate } from 'react-router'
+import AuthTabs from '../auth/AuthTabs'
 import LoginForm from '../forms/LoginForm'
 import { useAuth } from '../../contexts/AuthContext'
 
 function LoginSection () {
   const { login, state } = useAuth()
 
-  const navigate = useNavigate()
-
   const handleSubmit = async (credentials) => {
     if (credentials?.identifier && credentials?.password) {
       await login(credentials)
-      navigate('/')
     }
   }
 
   return (
-    <section className='flex flex-col w-full h-full mx-auto justify-center items-center gap-4 bg-white shadow-md rounded-lg p-4 max-w-md'>
-      <h2 className='text-2xl font-semibold'>Se connecter</h2>
+    <section className='w-full max-w-md bg-green-900/80 border-2 border-green-400/30 rounded-2xl shadow-2xl p-8 flex flex-col items-center backdrop-blur-md'>
+      <AuthTabs />
       <LoginForm onSubmit={handleSubmit} />
-      <p className='text-red-600'>
-        {state.error}
-      </p>
-      <Link to='/register' className='text-sm underline'>
-        Je n'ai pas de compte
-      </Link>
+      {state.error && (
+        <p className='text-red-500 text-sm mt-4 w-full text-center'>{state.error}</p>
+      )}
     </section>
   )
 }

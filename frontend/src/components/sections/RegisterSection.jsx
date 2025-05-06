@@ -1,9 +1,9 @@
-import { Link } from 'react-router'
+import AuthTabs from '../auth/AuthTabs'
 import RegisterForm from '../forms/RegisterForm'
 import { useAuth } from '../../contexts/AuthContext'
 
 function RegisterSection () {
-  const { register } = useAuth()
+  const { register, state } = useAuth()
   const handleSubmit = async (data) => {
     if (data?.email && data?.username && data?.password) {
       await register(data)
@@ -11,11 +11,12 @@ function RegisterSection () {
   }
 
   return (
-    <section className='flex flex-col w-full h-full mx-auto justify-center items-center gap-4 bg-white shadow-md rounded-lg p-4 max-w-md'>      <h2 className='text-2xl font-semibold'>S'inscrire</h2>
+    <section className='w-full max-w-md bg-green-900/80 border-2 border-green-400/30 rounded-2xl shadow-2xl p-8 flex flex-col items-center backdrop-blur-md'>
+      <AuthTabs />
       <RegisterForm onSubmit={handleSubmit} />
-      <Link to='/login' className='text-sm underline'>
-        J'ai déjà un compte
-      </Link>
+      {state?.error && (
+        <p className='text-red-500 text-sm mt-4 w-full text-center'>{state.error}</p>
+      )}
     </section>
   )
 }

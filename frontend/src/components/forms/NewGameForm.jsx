@@ -33,12 +33,12 @@ function NewGameForm () {
   return (
     <form
       onSubmit={handleSubmit}
-      className='flex flex-col gap-4 justify-center items-center'
+      className='flex flex-col gap-6 justify-center items-center bg-green-900/70 border-2 border-green-400/30 rounded-xl shadow-xl p-6 w-full max-w-lg backdrop-blur-md'
     >
       <Input
         type='text'
         value={gameData.name}
-        label='Nom de la partie'
+        label={<span className='font-fantasy text-lg text-green-200'>Nom de la partie</span>}
         onChangeText={(text) => setGameData({ ...gameData, name: text })}
       />
       <PlayersList
@@ -48,7 +48,7 @@ function NewGameForm () {
       />
       <Button
         type='submit'
-        variant='info'
+        className='bg-emerald-500 hover:bg-emerald-400 shadow-lg shadow-emerald-400/30 border-2 border-emerald-300/40 transition-all duration-200 font-fantasy text-xl'
       >
         Créer la partie
       </Button>

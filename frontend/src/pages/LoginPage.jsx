@@ -1,10 +1,11 @@
+import AuthLayout from '../components/auth/AuthLayout'
 import LoginSection from '../components/sections/LoginSection'
 
-function LoginPage ({ navigation }) {
+function LoginPage () {
   return (
-    <div className='flex flex-col items-center justify-center w-full h-full gap-4'>
+    <AuthLayout>
       <LoginSection />
-    </div>
+    </AuthLayout>
   )
 }
 
