@@ -53,7 +53,9 @@ function ProfileSection () {
         onRequestClose={() => setIsModalOpen(false)}
       >
         <h2 className='text-xl font-semibold mb-4'>Créer un personnage</h2>
-        <CreatePlayerForm />
+        <CreatePlayerForm
+          closeModal={() => setIsModalOpen(false)}
+        />
       </Modal>
     </>
   )

@@ -8,14 +8,14 @@ import { toast } from 'react-toastify'
 import { strapiCreatePlayer } from '../../api/strapi'
 import { useAuth } from '../../contexts/AuthContext'
 
-function CreatePlayerForm () {
+function CreatePlayerForm ({ closeModal }) {
   const [playerData, setPlayerData] = useState({
     name: '',
     class: 'bard',
     description: null
   })
 
-  const { state: { user } } = useAuth()
+  const { state: { user }, loadUserData } = useAuth()
 
   const handleChangeClass = (e) => {
     setPlayerData({ ...playerData, class: e.target.value })
@@ -46,6 +46,8 @@ function CreatePlayerForm () {
       })
       console.log(result)
       toast.success('Personnage créé')
+      loadUserData()
+      closeModal()
     } catch (error) {
       console.error(error)
       toast.error(error)
