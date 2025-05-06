@@ -3,7 +3,8 @@ import { useNavigate } from 'react-router'
 import Modal from 'react-modal'
 import Button from '../button'
 import CreatePlayerForm from '../forms/CreatePlayerForm'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
+import { strapiGetUser } from '../../api/strapi'
 
 const customStyles = {
   content: {
@@ -18,8 +19,16 @@ const customStyles = {
 
 function ProfileSection () {
   const [isModalOpen, setIsModalOpen] = useState(false)
-  const { logout } = useAuth()
+  const { logout, state: { user } } = useAuth()
   const navigate = useNavigate()
+
+  useEffect(() => {
+    const getData = async () => {
+      const user = await strapiGetUser()
+      console.log(user)
+    }
+    getData()
+  }, [])
 
   const handleLogout = () => {
     logout()
@@ -30,6 +39,7 @@ function ProfileSection () {
     <>
       <section className='flex flex-col w-full h-full mx-auto justify-center items-center gap-4 bg-white shadow-md rounded-lg p-4 max-w-md'>
         <h2 className='text-2xl font-semibold'>Mon Profil</h2>
+
         <Button
           variant='info'
           onClick={() => setIsModalOpen(true)}

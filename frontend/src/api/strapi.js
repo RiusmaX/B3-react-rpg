@@ -24,7 +24,6 @@ api.interceptors.request.use(
 )
 
 // AUTHENTICATION
-
 const strapiLoginLocal = async (credentials) => {
   const response = await api.post('/auth/local', credentials)
   return response.data
@@ -35,8 +34,13 @@ const strapiRegisterLocal = async (data) => {
   return response.data
 }
 
-// GAME
+// USER
+const strapiGetUser = async () => {
+  const response = await api.get('/users/me?populate=*')
+  return response.data
+}
 
+// GAME
 const strapiCreateGame = async (data) => {
   const body = {
     data: {
@@ -71,5 +75,6 @@ export {
   strapiLoginLocal,
   strapiRegisterLocal,
   strapiCreateGame,
-  strapiCreatePlayer
+  strapiCreatePlayer,
+  strapiGetUser
 }

@@ -402,12 +402,13 @@ export interface ApiGameGame extends Struct.CollectionTypeSchema {
 export interface ApiPlayerPlayer extends Struct.CollectionTypeSchema {
   collectionName: 'players';
   info: {
+    description: '';
     displayName: 'Player';
     pluralName: 'players';
     singularName: 'player';
   };
   options: {
-    draftAndPublish: true;
+    draftAndPublish: false;
   };
   attributes: {
     biography: Schema.Attribute.Text;
