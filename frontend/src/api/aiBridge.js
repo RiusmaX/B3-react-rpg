@@ -14,6 +14,13 @@ const generatePlayer = async (params) => {
   return result.data
 }
 
+// STORY
+const loadIntro = async (user) => {
+  const result = await api.post('/game/intro', user)
+  return result.data
+}
+
 export {
-  generatePlayer
+  generatePlayer,
+  loadIntro
 }

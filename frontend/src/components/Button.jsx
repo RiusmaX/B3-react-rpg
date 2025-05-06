@@ -7,7 +7,7 @@ function Button ({ children, className = '', ...props }) {
   return (
     <button
       {...props}
-      className={`w-full py-2 px-4 rounded-md bg-green-500 hover:bg-green-600 text-white font-semibold text-lg shadow transition-all duration-200 disabled:opacity-60 disabled:cursor-not-allowed ${className}`}
+      className={`w-full py-2 px-4 rounded-md bg-green-500 hover:bg-green-600 text-white font-semibold text-lg shadow transition-all duration-200 disabled:opacity-60 disabled:cursor-not-allowed cursor-pointer ${className}`}
     >
       {children}
     </button>

@@ -22,6 +22,7 @@ app.get('/', (req, res) => {
 // ROUTES
 app.use('/generate-avatar', require('./routes/generate-avatar'))
 app.use('/generate-player', require('./routes/generate-player'))
+app.use('/game', require('./routes/game'))
 
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`)

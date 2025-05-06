@@ -1,6 +1,7 @@
 import { createContext, useContext, useEffect, useReducer } from 'react'
 import { strapiLoadGame } from '../api/strapi'
 import { toast } from 'react-toastify'
+import { loadIntro } from '../api/aiBridge'
 
 const GameContext = createContext()
 
@@ -14,6 +15,7 @@ const initialState = {
 
 const actionTypes = {
   LOAD_GAME_DATA: 'LOAD_GAME_DATA',
+  LOAD_INTRO: 'LOAD_INTRO',
   ERROR: 'ERROR',
   LOADING: 'LOADING',
   RESET: 'RESET'
@@ -26,6 +28,13 @@ const gameReducer = (previousState, action) => {
       return {
         gameData: action.data,
         error: null,
+        loading: false
+      }
+    case actionTypes.LOAD_INTRO:
+      return {
+        ...previousState,
+        currentData: action.data,
+        history: [action.data],
         loading: false
       }
     case actionTypes.LOADING:
@@ -61,8 +70,24 @@ const gameFactory = (previousState, dispatch) => ({
         navigate('/')
       }
     } catch (error) {
-      handleError(error)
+      handleError(dispatch, error)
       navigate('/')
+    }
+  },
+  loadGameIntro: async (userData) => {
+    dispatch({
+      type: actionTypes.LOADING
+    })
+    try {
+      const intro = await loadIntro(userData)
+      if (intro) {
+        dispatch({
+          type: actionTypes.LOAD_INTRO,
+          data: intro
+        })
+      }
+    } catch (error) {
+      handleError(dispatch, error)
     }
   },
   reset: () => {
