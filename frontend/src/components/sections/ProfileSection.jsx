@@ -1,10 +1,10 @@
 import { useAuth } from '../../contexts/AuthContext'
 import { useNavigate } from 'react-router'
-import Modal from 'react-modal'
 import Button from '../button'
 import CreatePlayerForm from '../forms/CreatePlayerForm'
 import { useState } from 'react'
 import PlayersList from '../lists/playersList'
+import Modal from '../Modal'
 
 const customStyles = {
   content: {
@@ -47,9 +47,9 @@ function ProfileSection () {
       </section>
       <Modal
         isOpen={isModalOpen}
+        setIsOpen={setIsModalOpen}
         contentLabel='Informations du joueur'
         style={customStyles}
-        onRequestClose={() => setIsModalOpen(false)}
       >
         <h2 className='text-xl font-semibold mb-4'>Créer un personnage</h2>
         <CreatePlayerForm
