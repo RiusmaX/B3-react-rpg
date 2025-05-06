@@ -4,6 +4,7 @@ import PlayersList from '../lists/playersList'
 import { useAuth } from '../../contexts/AuthContext'
 import { strapiCreateGame } from '../../api/strapi'
 import { toast } from 'react-toastify'
+import Button from '../Button'
 
 function NewGameForm () {
   const [gameData, setGameData] = useState({
@@ -18,6 +19,7 @@ function NewGameForm () {
       // Création de la partie dans Strapi
       const result = await strapiCreateGame({
         name: gameData.name,
+        playerId: gameData.player.id,
         userId: user.id
       })
       console.log(result)
@@ -43,6 +45,12 @@ function NewGameForm () {
         selectedPlayer={gameData.player}
         onPlayerSelect={(player) => setGameData({ ...gameData, player })}
       />
+      <Button
+        type='submit'
+        variant='info'
+      >
+        Créer la partie
+      </Button>
     </form>
   )
 }

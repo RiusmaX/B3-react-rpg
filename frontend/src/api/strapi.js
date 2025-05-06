@@ -48,6 +48,9 @@ const strapiCreateGame = async (data) => {
       users: [
         data.userId
       ],
+      players: [
+        data.playerId
+      ],
       slug: slugify(data.name)
     }
   }
