@@ -4,6 +4,7 @@ import AuthRouter from './navigation/AuthRouter'
 import GlobalLayout from './layouts/GlobalLayout'
 import { ToastContainer } from 'react-toastify'
 import { useAuth } from './contexts/AuthContext'
+import { GameProvider } from './contexts/GameContext'
 
 function App () {
   const { state: { isLoggedIn } } = useAuth()
@@ -13,7 +14,11 @@ function App () {
       <GlobalLayout>
         {
           isLoggedIn
-            ? <MainRouter />
+            ? (
+              <GameProvider>
+                <MainRouter />
+              </GameProvider>
+              )
             : <AuthRouter />
         }
         <ToastContainer />

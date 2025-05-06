@@ -1,31 +1,20 @@
-import { useEffect, useState } from 'react'
+import { useEffect } from 'react'
 import { useNavigate, useParams } from 'react-router'
-import { strapiLoadGame } from '../api/strapi'
+import { useGame } from '../contexts/GameContext'
 
 function GamePage () {
-  const [game, setGame] = useState(null)
   const params = useParams()
+
   const navigate = useNavigate()
 
+  const { loadGameData, state: { gameData } } = useGame()
+
   useEffect(() => {
-    const getData = async () => {
-      try {
-        const _game = await strapiLoadGame(params.id)
-        if (_game?.data) {
-          setGame(_game.data)
-        } else {
-          navigate('/')
-        }
-      } catch (error) {
-        console.error(error)
-        navigate('/')
-      }
-    }
-    getData()
+    loadGameData(params.id, navigate)
   }, [])
 
   return (
-    <h1>{game?.name}</h1>
+    <h1>{gameData?.name}</h1>
   )
 }
 
