@@ -5,6 +5,7 @@ import Button from '../button'
 import CreatePlayerForm from '../forms/CreatePlayerForm'
 import { useEffect, useState } from 'react'
 import { strapiGetUser } from '../../api/strapi'
+import PlayersList from '../lists/playersList'
 
 const customStyles = {
   content: {
@@ -29,9 +30,9 @@ function ProfileSection () {
 
   return (
     <>
-      <section className='flex flex-col w-full h-full mx-auto justify-center items-center gap-4 bg-white shadow-md rounded-lg p-4 max-w-md'>
+      <section className='flex flex-col w-full h-full mx-auto justify-center items-center gap-4 bg-white shadow-md rounded-lg p-4 max-w-2xl'>
         <h2 className='text-2xl font-semibold'>Mon Profil</h2>
-
+        {user.players && <PlayersList players={user.players} />}
         <Button
           variant='info'
           onClick={() => setIsModalOpen(true)}
