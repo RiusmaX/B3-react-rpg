@@ -56,6 +56,11 @@ const strapiCreateGame = async (data) => {
   return response.data
 }
 
+const strapiLoadGame = async (gameId) => {
+  const response = await api.get(`/games/${gameId}?populate=*`)
+  return response.data
+}
+
 // Player
 const strapiCreatePlayer = async (data) => {
   const body = {
@@ -76,6 +81,7 @@ export {
   strapiLoginLocal,
   strapiRegisterLocal,
   strapiCreateGame,
+  strapiLoadGame,
   strapiCreatePlayer,
   strapiGetUser
 }

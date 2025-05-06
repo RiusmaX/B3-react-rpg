@@ -1,6 +1,7 @@
 import { Routes, Route, Navigate } from 'react-router'
 import HomePage from '../pages/HomePage'
 import ProfilePage from '../pages/ProfilePage'
+import GamePage from '../pages/GamePage'
 
 function MainRouter () {
   return (
@@ -11,6 +12,9 @@ function MainRouter () {
       />
       <Route path='/' element={<HomePage />} />
       <Route path='/profile' element={<ProfilePage />} />
+      <Route path='game'>
+        <Route path=':id' element={<GamePage />} />
+      </Route>
     </Routes>
   )
 }
