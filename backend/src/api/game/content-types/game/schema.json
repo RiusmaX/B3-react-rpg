@@ -4,7 +4,8 @@
   "info": {
     "singularName": "game",
     "pluralName": "games",
-    "displayName": "Game"
+    "displayName": "Game",
+    "description": ""
   },
   "options": {
     "draftAndPublish": false
@@ -17,9 +18,15 @@
       "type": "uid",
       "targetField": "name"
     },
-    "users": {
+    "players": {
       "type": "relation",
       "relation": "manyToMany",
+      "target": "api::player.player",
+      "inversedBy": "games"
+    },
+    "creator": {
+      "type": "relation",
+      "relation": "manyToOne",
       "target": "plugin::users-permissions.user",
       "inversedBy": "games"
     }

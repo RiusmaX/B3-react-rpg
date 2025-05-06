@@ -36,6 +36,12 @@
     },
     "hp": {
       "type": "integer"
+    },
+    "games": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::game.game",
+      "mappedBy": "players"
     }
   }
 }

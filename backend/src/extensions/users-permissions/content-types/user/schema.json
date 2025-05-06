@@ -73,17 +73,17 @@
       "type": "media",
       "multiple": false
     },
-    "games": {
-      "type": "relation",
-      "relation": "manyToMany",
-      "target": "api::game.game",
-      "mappedBy": "users"
-    },
     "players": {
       "type": "relation",
       "relation": "oneToMany",
       "target": "api::player.player",
       "mappedBy": "user"
+    },
+    "games": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::game.game",
+      "mappedBy": "creator"
     }
   }
 }

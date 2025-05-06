@@ -45,9 +45,7 @@ const strapiCreateGame = async (data) => {
   const body = {
     data: {
       name: data.name,
-      users: [
-        data.userId
-      ],
+      creator: data.userId.toString(),
       players: [
         data.playerId
       ],
