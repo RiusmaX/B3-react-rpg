@@ -1,5 +1,5 @@
 import { createContext, useContext, useEffect, useReducer } from 'react'
-import { strapiLoginLocal, strapiRegisterLocal } from '../api/strapi'
+import { strapiGetUser, strapiLoginLocal, strapiRegisterLocal } from '../api/strapi'
 import { toast } from 'react-toastify'
 
 const AuthContext = createContext()
@@ -15,6 +15,7 @@ const initialState = {
 const actionTypes = {
   LOGIN_SUCCESS: 'LOGIN_SUCCESS',
   REGISTER_SUCCESS: 'REGISTER_SUCCESS',
+  LOAD_USER_DATA: 'LOAD_USER_DATA',
   ERROR: 'ERROR',
   LOADING: 'LOADING',
   LOGOUT: 'LOGOUT'
@@ -29,6 +30,13 @@ const authReducer = (previousState, action) => {
         user: action.data.user,
         jwt: action.data.jwt,
         isLoggedIn: true,
+        loading: false,
+        error: null
+      }
+    case actionTypes.LOAD_USER_DATA:
+      return {
+        ...previousState,
+        user: action.data,
         loading: false,
         error: null
       }
@@ -80,6 +88,22 @@ const authFactory = (previousState, dispatch) => ({
       }
     } catch (error) {
       handleError(dispatch, error)
+    }
+  },
+  loadUserData: async () => {
+    dispatch({
+      type: actionTypes.LOADING
+    })
+    try {
+      const user = await strapiGetUser()
+      if (user) {
+        dispatch({
+          type: actionTypes.LOAD_USER_DATA,
+          data: user
+        })
+      }
+    } catch (error) {
+      handleError(error)
     }
   },
   logout: () => {

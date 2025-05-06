@@ -22,14 +22,6 @@ function ProfileSection () {
   const { logout, state: { user } } = useAuth()
   const navigate = useNavigate()
 
-  useEffect(() => {
-    const getData = async () => {
-      const user = await strapiGetUser()
-      console.log(user)
-    }
-    getData()
-  }, [])
-
   const handleLogout = () => {
     logout()
     navigate('/')
