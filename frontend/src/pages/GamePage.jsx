@@ -23,7 +23,7 @@ function GamePage () {
 
   return (
     <div className='w-full flex flex-col gap-8 justify-center items-center'>
-      <div className='text-white text-xl max-w-4xl'>
+      <div className='text-white text-xl max-w-4xl prose'>
         <Markdown>
           {currentData?.text}
         </Markdown>

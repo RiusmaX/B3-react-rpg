@@ -9,7 +9,7 @@ const generateIntro = async ({ playerName, playerBio }) => {
     Biographie du joueur : ${playerBio}
     Répond en JSON au format suivant : 
      {
-      "text": l'histoire que tu invente avec plusieurs paragraphe au format markdown. Tu peux ajouter des emojis et tout autre élément qui te semble utile.
+      "text": l'histoire que tu invente avec plusieurs paragraphe au format markdown. Tu peux ajouter des emojis et tout autre élément qui te semble utile. La mise en page doit être digne d'un livre.
       "actions": un tableau contenant une action pour commencer la partie et une action pour relancer l'intro. Utilise un nommage générique (actionId et actionLabel) dans les actions afin de les retrouver
       }
     `)
