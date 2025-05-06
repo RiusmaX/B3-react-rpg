@@ -3,8 +3,7 @@ import { useNavigate } from 'react-router'
 import Modal from 'react-modal'
 import Button from '../button'
 import CreatePlayerForm from '../forms/CreatePlayerForm'
-import { useEffect, useState } from 'react'
-import { strapiGetUser } from '../../api/strapi'
+import { useState } from 'react'
 import PlayersList from '../lists/playersList'
 
 const customStyles = {

@@ -38,13 +38,12 @@ function CreatePlayerForm ({ closeModal }) {
 
   const handleSavePlayer = async () => {
     try {
-      const result = await strapiCreatePlayer({
+      await strapiCreatePlayer({
         name: playerData.name,
         userId: user.id,
         description: playerData.description,
         class: playerData.class
       })
-      console.log(result)
       toast.success('Personnage créé')
       loadUserData()
       closeModal()
