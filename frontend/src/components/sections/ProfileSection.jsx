@@ -1,6 +1,6 @@
 import { useAuth } from '../../contexts/AuthContext'
 import { useNavigate } from 'react-router'
-import Button from '../button'
+import Button from '../Button'
 import CreatePlayerForm from '../forms/CreatePlayerForm'
 import { useState } from 'react'
 import PlayersList from '../lists/playersList'
