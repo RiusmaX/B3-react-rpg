@@ -14,7 +14,8 @@ function NewGameForm () {
 
   const { state: { user } } = useAuth()
 
-  const handleSubmit = async () => {
+  const handleSubmit = async (e) => {
+    e.preventDefault()
     try {
       // Création de la partie dans Strapi
       const result = await strapiCreateGame({
