@@ -37,7 +37,7 @@ services:
     environment:
       MARIADB_RANDOM_ROOT_PASSWORD: random
       MARIADB_DATABASE: ${DATABASE_NAME}
-      MARIADB_USERNAME: ${DATABASE_USERNAME}
+      MARIADB_USER: ${DATABASE_USERNAME}
       MARIADB_PASSWORD: ${DATABASE_PASSWORD}
     networks:
       - rpg-network
