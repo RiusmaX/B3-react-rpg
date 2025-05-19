@@ -1,0 +1,60 @@
+services:
+  rpg-backend:
+    container_name: rpg-backend
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    env_file: 
+      - ./backend/.env
+    environment:
+      DATABASE_CLIENT: mysql
+      DATABASE_HOST: ${DATABASE_HOST}
+      DATABASE_PORT: ${DATABASE_PORT}
+      DATABASE_NAME: ${DATABASE_NAME}
+      DATABASE_USERNAME: ${DATABASE_USERNAME}
+      DATABASE_PASSWORD: ${DATABASE_PASSWORD}
+      DATABASE_SSL: false
+    volumes:
+      - ./backend/config:/opt/app/config
+      - ./backend/src:/opt/app/src
+      - ./backend/package.json:/opt/package.json
+      - ./backend/.env:/opt/app/.env
+      - ./backend/yarn.lock:/opt/yarn.lock
+      - ./backend/public/uploads:/opt/app/public/uploads
+    ports:
+      - 1337:1337
+    depends_on:
+      - rpg-db 
+    restart: unless-stopped
+    networks:
+      - rpg-network
+
+  rpg-db:
+    image: mariadb:latest
+    env_file:
+      - ./backend/.env
+    container_name: rpg-db
+    environment:
+      MARIADB_RANDOM_ROOT_PASSWORD: random
+      MARIADB_DATABASE: ${DATABASE_NAME}
+      MARIADB_USERNAME: ${DATABASE_USERNAME}
+      MARIADB_PASSWORD: ${DATABASE_PASSWORD}
+    networks:
+      - rpg-network
+    restart: unless-stopped
+    volumes:
+      - rpg-db-volume:/var/lib/mysql:rw
+  
+  adminer:
+    image: adminer:latest
+    container_name: rpg-adminer
+    ports:
+      - 8080:8080
+    restart: unless-stopped
+    networks:
+      - rpg-network
+
+networks:
+  rpg-network:
+volumes:
+  rpg-db-volume:
