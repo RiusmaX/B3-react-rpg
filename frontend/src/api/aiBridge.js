@@ -33,7 +33,13 @@ const loadIntro = async (data) => {
   return result.data
 }
 
+const loadNextStep = async (data) => {
+  const result = await api.post('/game/next', data)
+  return result.data
+}
+
 export {
   generatePlayer,
-  loadIntro
+  loadIntro,
+  loadNextStep
 }

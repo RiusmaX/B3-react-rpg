@@ -14,14 +14,18 @@ const generateImage = async () => {
 }
 
 const generateText = async (prompt) => {
-  const response = await ai.models.generateContent({
-    model: 'gemini-2.0-flash',
-    config: {
-      responseMimeType: 'application/json'
-    },
-    contents: prompt
-  })
-  return response?.candidates[0]?.content?.parts[0]?.text
+  try {
+    const response = await ai.models.generateContent({
+      model: 'gemini-2.0-flash',
+      config: {
+        responseMimeType: 'application/json'
+      },
+      contents: prompt
+    })
+    return response?.candidates[0]?.content?.parts[0]?.text
+  } catch (error) {
+    console.error(error)
+  }
 }
 
 module.exports = {

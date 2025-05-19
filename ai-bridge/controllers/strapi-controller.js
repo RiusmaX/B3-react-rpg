@@ -20,11 +20,11 @@ const fetchGame = async (gameId, token) => {
   return data
 }
 
-const saveGameProgress = async (step, aiResponse, gameId = 1, token) => {
+const saveGameProgress = async (step, aiResponse, gameId, token) => {
   try {
     const data = await fetchGame(gameId, token)
     // On récupère l'historique ou on le créé si non existant
-    const historyUpdated = data.history ? data.data.history : {}
+    const historyUpdated = data.data.history ? data.data.history : {}
     historyUpdated[step] = JSON.parse(aiResponse)
 
     // On met à jour la partie avec le nouvel historique

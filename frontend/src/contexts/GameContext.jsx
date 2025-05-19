@@ -1,7 +1,7 @@
 import { createContext, useContext, useEffect, useReducer } from 'react'
 import { strapiLoadGame } from '../api/strapi'
 import { toast } from 'react-toastify'
-import { loadIntro } from '../api/aiBridge'
+import { loadIntro, loadNextStep } from '../api/aiBridge'
 
 const GameContext = createContext()
 
@@ -15,6 +15,7 @@ const initialState = {
 
 const actionTypes = {
   LOAD_GAME_DATA: 'LOAD_GAME_DATA',
+  LOAD_NEXT_STEP: 'LOAD_NEXT_STEP',
   LOAD_INTRO: 'LOAD_INTRO',
   ERROR: 'ERROR',
   LOADING: 'LOADING',
@@ -27,6 +28,8 @@ const gameReducer = (previousState, action) => {
     case actionTypes.LOAD_GAME_DATA:
       return {
         gameData: action.data,
+        history: action.history,
+        currentData: action.currentData,
         error: null,
         loading: false
       }
@@ -34,7 +37,13 @@ const gameReducer = (previousState, action) => {
       return {
         ...previousState,
         currentData: action.data,
-        history: [action.data],
+        loading: false
+      }
+    case actionTypes.LOAD_NEXT_STEP:
+      return {
+        ...previousState,
+        currentData: action.data,
+        history: action.history,
         loading: false
       }
     case actionTypes.LOADING:
@@ -61,10 +70,17 @@ const gameFactory = (previousState, dispatch) => ({
     })
     try {
       const game = await strapiLoadGame(id)
+      const _currentData = game?.data?.history
+        ? game.data.history[Object.keys(game.data.history)[Object.keys(game.data.history).length - 1]]
+        : null
+
+      console.log(_currentData)
       if (game?.data) {
         dispatch({
           type: actionTypes.LOAD_GAME_DATA,
-          data: game.data
+          data: game.data,
+          history: game.data.history,
+          currentData: _currentData
         })
       } else {
         navigate('/')
@@ -74,12 +90,13 @@ const gameFactory = (previousState, dispatch) => ({
       navigate('/')
     }
   },
-  loadGameIntro: async (userData) => {
+  loadGameIntro: async () => {
     dispatch({
       type: actionTypes.LOADING
     })
     try {
-      const intro = await loadIntro({ gameData: previousState.gameData, userData })
+      console.log(previousState)
+      const intro = await loadIntro({ gameData: previousState.gameData, userData: previousState.gameData.players[0] })
       if (intro) {
         dispatch({
           type: actionTypes.LOAD_INTRO,
@@ -88,6 +105,28 @@ const gameFactory = (previousState, dispatch) => ({
       }
     } catch (error) {
       handleError(dispatch, error)
+    }
+  },
+  loadNextStep: async (action) => {
+    dispatch({
+      type: actionTypes.LOADING
+    })
+    try {
+      console.log('previousState', previousState)
+      const nextStep = await loadNextStep({
+        gameData: previousState.gameData,
+        userData: previousState.gameData.players[0],
+        action
+      })
+      if (nextStep) {
+        dispatch({
+          type: actionTypes.LOAD_NEXT_STEP,
+          data: JSON.parse(nextStep.step),
+          history: nextStep.history
+        })
+      }
+    } catch (error) {
+      handleError(error)
     }
   },
   reset: () => {

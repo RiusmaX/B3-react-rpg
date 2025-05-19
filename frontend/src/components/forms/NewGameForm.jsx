@@ -6,6 +6,7 @@ import { strapiCreateGame } from '../../api/strapi'
 import { toast } from 'react-toastify'
 import Button from '../Button'
 import { useNavigate } from 'react-router'
+import { useGame } from '../../contexts/GameContext'
 
 function NewGameForm () {
   const [gameData, setGameData] = useState({
@@ -14,6 +15,7 @@ function NewGameForm () {
   })
 
   const { state: { user } } = useAuth()
+  const { reset } = useGame()
   const navigate = useNavigate()
 
   const handleSubmit = async (e) => {
@@ -27,6 +29,7 @@ function NewGameForm () {
       })
       console.log(result)
       toast.success('Partie créée avec succès')
+      reset()
       navigate(`/game/${result?.data?.documentId}`)
     } catch (error) {
       console.error(error)
