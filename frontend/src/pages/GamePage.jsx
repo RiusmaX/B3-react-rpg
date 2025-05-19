@@ -21,6 +21,16 @@ function GamePage () {
 
   console.log(currentData)
 
+  const handleAction = async (action) => {
+    if (action.actionId === 'start_game') {
+      console.log(action)
+      // Continuer
+    } else {
+      console.log('reload game')
+      // Recharger l'intro
+    }
+  }
+
   return (
     <div className='w-full flex flex-col gap-8 justify-center items-center'>
       <div className='text-white text-xl max-w-4xl prose'>
@@ -31,7 +41,7 @@ function GamePage () {
       <div className='max-w-4xl flex flex-col items-center justify-center gap-4'>
         {
           currentData?.actions?.map(action => (
-            <Button key={action.actionId}>
+            <Button key={action.actionId} onClick={() => handleAction(action)}>
               {action.actionLabel}
             </Button>
           ))
