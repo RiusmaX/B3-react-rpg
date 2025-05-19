@@ -28,8 +28,8 @@ const generatePlayer = async (params) => {
 }
 
 // STORY
-const loadIntro = async (user) => {
-  const result = await api.post('/game/intro', user)
+const loadIntro = async (data) => {
+  const result = await api.post('/game/intro', data)
   return result.data
 }
 

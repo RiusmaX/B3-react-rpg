@@ -79,7 +79,7 @@ const gameFactory = (previousState, dispatch) => ({
       type: actionTypes.LOADING
     })
     try {
-      const intro = await loadIntro(userData)
+      const intro = await loadIntro({ gameData: previousState.gameData, userData })
       if (intro) {
         dispatch({
           type: actionTypes.LOAD_INTRO,
