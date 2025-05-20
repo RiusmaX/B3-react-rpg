@@ -2,7 +2,7 @@ import axios from 'axios'
 import slugify from 'slugify'
 
 const api = axios.create({
-  baseURL: 'http://localhost:1337/api',
+  baseURL: import.meta.env.VITE_STRAPI_URL,
   headers: {
     'Content-Type': 'application/json',
     Accept: 'application/json'

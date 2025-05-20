@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import Input from './inputs/Input'
-import PlayersList from '../lists/playersList'
+import PlayersList from '../lists/PlayersList'
 import { useAuth } from '../../contexts/AuthContext'
 import { strapiCreateGame } from '../../api/strapi'
 import { toast } from 'react-toastify'

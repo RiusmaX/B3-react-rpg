@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router'
 import Button from '../Button'
 import CreatePlayerForm from '../forms/CreatePlayerForm'
 import { useState } from 'react'
-import PlayersList from '../lists/playersList'
+import PlayersList from '../lists/PlayersList'
 import Modal from '../Modal'
 
 const customStyles = {
